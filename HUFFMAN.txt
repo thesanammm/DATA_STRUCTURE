@@ -1,0 +1,98 @@
+#include <stdio.h>
+int size ;
+
+void swap(int *a,int *b)
+{
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
+
+
+
+void minheapify(int arr[],int idx)
+{
+  int smallest = idx;
+  int leftchild = idx*2+1;
+  int rightchild = idx*2+2;
+
+  if(leftchild<size && arr[leftchild] < arr[smallest])
+    smallest = leftchild;
+
+  if(rightchild<size && arr[rightchild] < arr[smallest])
+    smallest = rightchild;
+
+
+  if(idx != smallest)
+  {
+    swap(&arr[idx],&arr[smallest]);
+    minheapify(arr,smallest);
+  }
+  
+}
+
+
+void buildheap(int arr[])
+{
+	int i;
+  int s = (size/2)-1;
+  for( i=s;i>=0;i--) 
+  minheapify(arr,i);
+}
+
+
+
+int extract(int arr[])
+{
+   int x = arr[0];
+   swap(&arr[0],&arr[size-1]);
+   size-=1;
+   minheapify(arr,0);
+  return x;
+}
+
+void insert(int arr[],int element)
+{
+	int i;
+  size+=1;
+  arr[size-1] = element;
+  for(i=(size/2)-1;i>=0;i--) minheapify(arr,i);
+}
+
+
+void print(int arr[])
+{
+	int i;
+  for(i=0;i<size;i++)
+    printf("%d ",arr[i]);
+
+  
+  printf("\n");
+}
+
+void huffman(int arr[])
+{
+  while(size>1)
+    {
+      int x = extract(arr);
+      int y = extract(arr);
+      insert(arr, x+y);
+      print(arr);
+    }
+}
+
+
+int main(void) {
+ printf("Enter the size\n");
+  scanf("%d",&size);
+  int arr[size],i;
+   printf("Enter the elements");
+  for(i=0;i<size;i++) 
+ 
+  scanf("%d",&arr[i]);
+  print(arr);
+  buildheap(arr);
+  print(arr);
+  huffman(arr);
+  return 0;
+}

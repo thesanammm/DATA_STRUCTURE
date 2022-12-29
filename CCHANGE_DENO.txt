@@ -1,0 +1,45 @@
+#include<stdio.h>
+
+void cchange(int c[], int n, int x)
+{
+	int s[100]={0}, i=n-1,j=0;
+	while(x>0 && i>0)
+  	{
+    	  if(c[i]>x)
+       i--;
+    	  else
+    	  {
+    		s[j++]=c[i];
+      	x-=c[i];
+    	  }
+  	}
+
+  	if(x>0)
+    	printf("shortage of %d denominations to fill this value",x);
+	printf("\nSOLUTION:: ");
+	for(j=0; j<100; j++)
+  	{
+    	  if(s[j]==0)
+       break;
+	  printf("%d  ", s[j]);
+  	}
+  	 printf("\n%d COINS\n",j);
+}
+
+int main()
+{
+	int i, n, v;
+	printf("ENTER SIZE OF ARRAY:: ");
+	scanf("%d",&n);
+	
+	int a[n];
+	printf("ENTER ELEMENTS TO THE ARRAY:: ");
+	for(i=0; i<n; i++)
+	scanf("%d",&a[i]);
+	
+	printf("ENTER VALUE:: ");
+	scanf("%d",&v);
+	cchange(a, n, v);
+	
+	return 0;
+}

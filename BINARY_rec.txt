@@ -1,0 +1,52 @@
+#include<stdio.h>
+int rec_BinarySearch(int array[],int x,int low,int high)
+{
+  int count=0;
+  if(high>=low)
+  {
+    int mid=(high+low)/2;
+    count++;
+    if(array[mid]==x)
+    {
+      count++;
+      printf("Depth=%d\n",count);
+      return mid;
+    }
+    else if(array[mid]>x)
+    {
+        return rec_BinarySearch(array,x,low,mid-1);
+        count++;
+    }
+  else
+  {
+  	return rec_BinarySearch(array,x,mid+1,high);
+  	count++;
+  }
+}
+  printf("step: %d",count);
+  return -1;
+}
+
+int main(void)
+{
+   int x,n,i,result;
+   int array[n];
+   printf("Enter the size of the array: ");
+   scanf("%d",&n);
+   printf("Enter the numbers: ");
+   for(i=0;i<n;i++)
+   {
+     scanf("%d", &array[i]);
+   }
+    printf("Enter the key: ");
+    scanf("%d" ,&x);
+    result=rec_BinarySearch(array,x,0,n-1);
+    if(result==-1)
+    {
+      printf("Element not present");
+    }
+    else
+    {
+      printf("Element present at index %d" ,result);
+    }
+ }
